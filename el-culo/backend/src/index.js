@@ -22,24 +22,20 @@ const io = new Server(httpServer, {
   pingInterval: 10000,
 });
 
-// ── Middlewares ───────────────────────────────────────────────────
-app.use(helmet());
 app.use(cors({ origin: '*' }));
+app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use(express.json({ limit: '10kb' }));
 
 const limiter = rateLimit({ windowMs: 60_000, max: 100, standardHeaders: true });
 app.use('/api/', limiter);
 
-// ── Routes ────────────────────────────────────────────────────────
 app.use('/api/auth',  authRoutes);
 app.use('/api/users', usersRoutes);
 
 app.get('/api/health', (_req, res) => res.json({ ok: true, ts: Date.now() }));
 
-// ── Socket.io ─────────────────────────────────────────────────────
 socketHandler(io);
 
-// ── Start ─────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 3001;
 httpServer.listen(PORT, () => {
   console.log(`El Culo backend running on :${PORT}`);
