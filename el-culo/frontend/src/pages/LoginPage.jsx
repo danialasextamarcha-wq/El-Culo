@@ -106,7 +106,7 @@ export default function LoginPage() {
             <form onSubmit={handleGuest} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               <input
                 className="input-field"
-                placeholder="Tu nickname"
+                placeholder="Ponte un buen nombre, marica"
                 value={nickname}
                 onChange={e => setNickname(e.target.value)}
                 maxLength={32}
