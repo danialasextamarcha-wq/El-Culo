@@ -15,7 +15,7 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
   cors: {
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    origin: '*',
     methods: ['GET', 'POST'],
   },
   pingTimeout: 30000,
@@ -24,7 +24,7 @@ const io = new Server(httpServer, {
 
 // ── Middlewares ───────────────────────────────────────────────────
 app.use(helmet());
-app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:5173' }));
+app.use(cors({ origin: '*' }));
 app.use(express.json({ limit: '10kb' }));
 
 const limiter = rateLimit({ windowMs: 60_000, max: 100, standardHeaders: true });
