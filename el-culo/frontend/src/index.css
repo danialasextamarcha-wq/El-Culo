@@ -1,0 +1,92 @@
+:root {
+  --green-dark:  #0a1f0f;
+  --green-felt:  #1a4a2e;
+  --green-mid:   #2d7a4f;
+  --gold:        #c9a84c;
+  --gold-light:  #f0d080;
+  --cream:       #fdf6e3;
+  --card-bg:     #fffef9;
+  --red-suit:    #c0392b;
+  --black-suit:  #1a1a1a;
+  --shadow-card: 0 4px 16px rgba(0,0,0,0.35);
+  --radius:      12px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--green-dark);
+  color: var(--cream);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+input {
+  font-family: inherit;
+}
+
+.gold-text {
+  color: var(--gold);
+  font-family: 'Playfair Display', serif;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold), #a8832a);
+  color: var(--green-dark);
+  border: none;
+  border-radius: var(--radius);
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 8px rgba(201,168,76,0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(201,168,76,0.5);
+}
+
+.btn-primary:active { transform: scale(0.97); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--gold);
+  border: 1.5px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 11px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+
+.btn-secondary:hover { background: rgba(201,168,76,0.12); }
+
+.input-field {
+  background: rgba(255,255,255,0.07);
+  border: 1.5px solid rgba(201,168,76,0.3);
+  border-radius: 8px;
+  color: var(--cream);
+  padding: 12px 16px;
+  font-size: 15px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-field:focus { border-color: var(--gold); }
+.input-field::placeholder { color: rgba(253,246,227,0.4); }
+
+.card-felt {
+  background: rgba(26,74,46,0.6);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: var(--radius);
+  backdrop-filter: blur(8px);
+}
