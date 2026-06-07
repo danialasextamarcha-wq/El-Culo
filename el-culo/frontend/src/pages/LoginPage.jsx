@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useAuthStore } from '../store';
 import toast from 'react-hot-toast';
 
+const API = import.meta.env.VITE_WS_URL || '';
+
 export default function LoginPage() {
   const [tab, setTab] = useState('guest');
   const [nickname, setNickname] = useState('');
@@ -18,7 +20,7 @@ export default function LoginPage() {
     if (!nickname.trim()) return toast.error('Escribe un nickname');
     setLoading(true);
     try {
-      const { data } = await axios.post('/api/auth/guest', { nickname: nickname.trim() });
+      const { data } = await axios.post(`${API}/api/auth/guest`, { nickname: nickname.trim() });
       setAuth(data.user, data.token);
       navigate('/lobby');
     } catch (err) {
@@ -32,7 +34,7 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await axios.post('/api/auth/login', { nickname, password });
+      const { data } = await axios.post(`${API}/api/auth/login`, { nickname, password });
       setAuth(data.user, data.token);
       navigate('/lobby');
     } catch (err) {
@@ -46,7 +48,7 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await axios.post('/api/auth/register', { nickname, email, password });
+      const { data } = await axios.post(`${API}/api/auth/register`, { nickname, email, password });
       setAuth(data.user, data.token);
       navigate('/lobby');
     } catch (err) {
@@ -66,7 +68,6 @@ export default function LoginPage() {
       padding: 20,
     }}>
       <div style={{ width: '100%', maxWidth: 420, textAlign: 'center' }}>
-        {/* Logo */}
         <div style={{ marginBottom: 36 }}>
           <div style={{ fontSize: 72, marginBottom: 8 }}>🃏</div>
           <h1 style={{
@@ -84,9 +85,7 @@ export default function LoginPage() {
           </p>
         </div>
 
-        {/* Card */}
         <div className="card-felt" style={{ padding: 32 }}>
-          {/* Tabs */}
           <div style={{ display: 'flex', marginBottom: 28, borderRadius: 10, overflow: 'hidden', border: '1px solid rgba(201,168,76,0.2)' }}>
             {[['guest','Invitado'],['login','Entrar'],['register','Registrarse']].map(([key, label]) => (
               <button key={key} onClick={() => setTab(key)} style={{
@@ -104,14 +103,8 @@ export default function LoginPage() {
 
           {tab === 'guest' && (
             <form onSubmit={handleGuest} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-              <input
-                className="input-field"
-                placeholder="Ponte un buen nombre, marica"
-                value={nickname}
-                onChange={e => setNickname(e.target.value)}
-                maxLength={32}
-                autoFocus
-              />
+              <input className="input-field" placeholder="Tu nickname" value={nickname}
+                onChange={e => setNickname(e.target.value)} maxLength={32} autoFocus />
               <button className="btn-primary" type="submit" disabled={loading}>
                 {loading ? 'Entrando...' : 'Jugar como invitado 🎮'}
               </button>
